@@ -1,9 +1,9 @@
 [package]
 name = "json-subscriber"
 description = "Customizable layer and subscriber for `tracing` that emits logs in JSON"
-version = "0.2.4"
+version = "2.0.0"
 edition = "2021"
-rust-version = "1.65"
+rust-version = "1.75"
 homepage = "https://github.com/mladedav/json-subscriber"
 keywords = ["logging", "tracing", "json", "subscriber"]
 license = "MIT"
@@ -35,8 +35,8 @@ tracing-subscriber = { version = "0.3.18", default-features = false, features = 
 ] }
 
 # OpenTelemetry
-tracing-opentelemetry = { version = "0.25.0", default-features = false, optional = true }
-opentelemetry = { version = "0.24.0", default-features = false, optional = true }
+tracing-opentelemetry = { version = "0.30.0", default-features = false, optional = true }
+opentelemetry = { version = "0.29.1", default-features = false, optional = true }
 # OpenTelemetry depends on this but with a version such that minimal versions are broken. We do not use this.
 async-trait = { version = "0.1.9", default-features = false, optional = true }
 # Another dependency that needs to have higher version to compile
@@ -49,8 +49,8 @@ thiserror = "1.0.31"
 tracing = { version = "0.1", features = ["attributes"] }
 tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
 
-opentelemetry_sdk = { version = "0.24.1", default-features = false }
-opentelemetry-stdout = "0.5"
+opentelemetry_sdk = { version = "0.29.0", default-features = false }
+opentelemetry-stdout = "0.29.0"
 
 [package.metadata.docs.rs]
 all-features = true

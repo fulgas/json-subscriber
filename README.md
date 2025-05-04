@@ -122,6 +122,14 @@ fn main() {
 }
 ```
 
+### Compatibility Version
+
+| json-subscriber | open-telemetry    | 
+|-----------------|-------------------|
+| =0.2            | =0.24.0, <=0.27.0 |
+| 1.0.0           | =0.28.0           | 
+| \> 2.0.0        | =0.29.0           |
+
 ## Benchmarks
 
 This crate strives to be faster than `tracing_subscriber`. See [benchmarks](docs/benchmark.md).

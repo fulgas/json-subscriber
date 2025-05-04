@@ -1,3 +1,5 @@
+use opentelemetry_sdk::trace::SdkTracerProvider;
+
 mod yak_shave;
 
 #[cfg(feature = "opentelemetry")]
@@ -5,15 +7,12 @@ fn main() {
     use opentelemetry::trace::TracerProvider;
     use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
-    let exporter = opentelemetry_stdout::SpanExporter::builder()
-        .with_writer(std::io::sink())
+    let exporter = opentelemetry_stdout::SpanExporter::default();
+    let provider = SdkTracerProvider::builder()
+        .with_simple_exporter(exporter)
         .build();
-    let builder =
-        opentelemetry_sdk::trace::TracerProvider::builder().with_simple_exporter(exporter);
-    let provider = builder.build();
-    let tracer = provider
-        .tracer_builder("opentelemetry-stdout-exporter")
-        .build();
+
+    let tracer = provider.tracer("opentelemetry-stdout-exporter");
     opentelemetry::global::set_tracer_provider(provider);
 
     let opentelemetry = tracing_opentelemetry::layer().with_tracer(tracer);
@@ -28,7 +27,7 @@ fn main() {
         .init();
 
     let number_of_yaks = 3;
-    // this creates a new event, outside of any spans.
+    // this creates a new event, outside any spans.
     tracing::info!(number_of_yaks, "preparing to shave yaks");
 
     let number_shaved = yak_shave::shave_all(number_of_yaks);
